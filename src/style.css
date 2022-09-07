@@ -1,0 +1,220 @@
+/* Reset */
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  font-size: 64.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+/* Utilities */
+
+.container {
+  padding: 2rem 1rem 0rem;
+}
+
+/* Layout */
+
+.app {
+  height: 90vh;
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) 3fr;
+}
+
+.nav {
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.dropdown {
+  margin-top: auto;
+}
+
+.areas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* Navigation styling */
+.area-heading {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.project-list {
+  list-style: none;
+}
+
+.project-list a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 0.5rem;
+}
+
+.nav-item:hover,
+.project-list li:hover {
+  background-color: grey;
+}
+
+.project-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-item a:link,
+.nav-item a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+.area-title {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.areas-list {
+  list-style: none;
+}
+
+.area-item {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Dropdown-menu */
+
+.dropdown {
+  /* background-color: red; */
+  border-top: 1px solid grey;
+  padding-top: 0.5rem;
+  display: inline-block;
+  position: relative;
+  z-index: 10;
+}
+
+.dropdown-btn {
+  width: 100%;
+  border: none;
+  padding: 0.8rem;
+
+  cursor: pointer;
+  display: flex;
+
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.dropdown-btn:hover {
+  background-color: 222;
+}
+
+.dropdown-heading {
+  font-size: inherit;
+}
+
+.dropdown-menu {
+  position: absolute;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+  bottom: 100%;
+  left: 0;
+  display: none;
+
+  background-color: aquamarine;
+
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dropdown-title {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropdown-new {
+  padding: 1rem 1rem 1rem 0;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+}
+
+.dropdown-new:hover {
+  background-color: blue;
+}
+
+.dropdown-description {
+  margin-left: 2.5rem;
+  text-align: left;
+}
+
+/* Project styling */
+
+.project-content {
+  padding: 4.5rem 3.5rem;
+}
+
+.project-heading {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.project-description {
+  margin-bottom: 1.6rem;
+  max-width: 55ch;
+}
+
+.subtasks-heading {
+  border-bottom: 1px solid black;
+  margin-bottom: 1rem;
+}
+
+.subtasks-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.subtasks-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=
+    , initial-scale=1.0"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <title>Odin Todo</title>
+  </head>
+  <body>
+    <main class="app">
+      <nav class="nav container">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="#000000"
+              viewBox="0 0 256 256"
+              class="nav-icon icon-inbox"
+            >
+              <rect width="256" height="256" fill="none"></rect>
+              <rect
+                x="40"
+                y="40"
+                width="176"
+                height="176"
+                rx="8"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              ></rect>
+              <polyline
+                points="94.1 134.1 128 168 161.9 134.1"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              ></polyline>
+              <line
+                x1="128"
+                y1="88"
+                x2="128"
+                y2="168"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              ></line>
+            </svg>
+            <a href="#">Inbox</a>
+          </li>
+          <li class="nav-item">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="#000000"
+              viewBox="0 0 256 256"
+              class="nav-icon icon-today"
+            >
+              <rect width="256" height="256" fill="none"></rect>
+              <path
+                d="M132.4,190.7l50.4,32c6.5,4.1,14.5-2,12.6-9.5l-14.6-57.4a8.7,8.7,0,0,1,2.9-8.8l45.2-37.7c5.9-4.9,2.9-14.8-4.8-15.3l-59-3.8a8.3,8.3,0,0,1-7.3-5.4l-22-55.4a8.3,8.3,0,0,0-15.6,0l-22,55.4a8.3,8.3,0,0,1-7.3,5.4L31.9,94c-7.7.5-10.7,10.4-4.8,15.3L72.3,147a8.7,8.7,0,0,1,2.9,8.8L61.7,209c-2.3,9,7.3,16.3,15,11.4l46.9-29.7A8.2,8.2,0,0,1,132.4,190.7Z"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              ></path>
+            </svg>
+            <a href="#">Today</a>
+          </li>
+          <li class="nav-item">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="#000000"
+              viewBox="0 0 256 256"
+              class="nav-icon icon-upcoming"
+            >
+              <rect width="256" height="256" fill="none"></rect>
+              <rect
+                x="40"
+                y="40"
+                width="176"
+                height="176"
+                rx="8"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              ></rect>
+              <line
+                x1="176"
+                y1="24"
+                x2="176"
+                y2="56"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              ></line>
+              <line
+                x1="80"
+                y1="24"
+                x2="80"
+                y2="56"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              ></line>
+              <line
+                x1="40"
+                y1="88"
+                x2="216"
+                y2="88"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              ></line>
+            </svg>
+            <a href="#">Upcoming</a>
+          </li>
+        </ul>
+
+        <ul class="areas-list">
+          <li class="area-item">
+            <div class="area-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <rect width="256" height="256" fill="none"></rect>
+                <path
+                  d="M224,177.3V78.7a8.1,8.1,0,0,0-4.1-7l-88-49.5a7.8,7.8,0,0,0-7.8,0l-88,49.5a8.1,8.1,0,0,0-4.1,7v98.6a8.1,8.1,0,0,0,4.1,7l88,49.5a7.8,7.8,0,0,0,7.8,0l88-49.5A8.1,8.1,0,0,0,224,177.3Z"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></path>
+                <polyline
+                  points="222.9 74.6 128.9 128 33.1 74.6"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></polyline>
+                <line
+                  x1="128.9"
+                  y1="128"
+                  x2="128"
+                  y2="234.8"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></line>
+              </svg>
+              <h2 class="area-heading">Family</h2>
+            </div>
+            <ul class="project-list">
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <rect width="256" height="256" fill="none"></rect>
+                  <circle
+                    cx="128"
+                    cy="128"
+                    r="96"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></circle></svg
+                ><a href="#">Vacation in Rome</a>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <rect width="256" height="256" fill="none"></rect>
+                  <circle
+                    cx="128"
+                    cy="128"
+                    r="96"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></circle></svg
+                ><a href="#">Buy a New Car</a>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <rect width="256" height="256" fill="none"></rect>
+                  <circle
+                    cx="128"
+                    cy="128"
+                    r="96"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></circle></svg
+                ><a href="#">Throw Party for Eve</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="area-item">
+            <div class="area-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <rect width="256" height="256" fill="none"></rect>
+                <path
+                  d="M224,177.3V78.7a8.1,8.1,0,0,0-4.1-7l-88-49.5a7.8,7.8,0,0,0-7.8,0l-88,49.5a8.1,8.1,0,0,0-4.1,7v98.6a8.1,8.1,0,0,0,4.1,7l88,49.5a7.8,7.8,0,0,0,7.8,0l88-49.5A8.1,8.1,0,0,0,224,177.3Z"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></path>
+                <polyline
+                  points="222.9 74.6 128.9 128 33.1 74.6"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></polyline>
+                <line
+                  x1="128.9"
+                  y1="128"
+                  x2="128"
+                  y2="234.8"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></line>
+              </svg>
+              <h2 class="area-heading">Work</h2>
+            </div>
+            <ul class="project-list">
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <rect width="256" height="256" fill="none"></rect>
+                  <circle
+                    cx="128"
+                    cy="128"
+                    r="96"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></circle></svg
+                ><a href="#"> Prepare Presentation</a>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <rect width="256" height="256" fill="none"></rect>
+                  <circle
+                    cx="128"
+                    cy="128"
+                    r="96"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></circle></svg
+                ><a href="#">Onboard James</a>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <rect width="256" height="256" fill="none"></rect>
+                  <circle
+                    cx="128"
+                    cy="128"
+                    r="96"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></circle></svg
+                ><a href="#">Attend Conference</a>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <rect width="256" height="256" fill="none"></rect>
+                  <circle
+                    cx="128"
+                    cy="128"
+                    r="96"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></circle></svg
+                ><a href="#">Order Team T-Shirts</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="area-item">
+            <div class="area-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <rect width="256" height="256" fill="none"></rect>
+                <path
+                  d="M224,177.3V78.7a8.1,8.1,0,0,0-4.1-7l-88-49.5a7.8,7.8,0,0,0-7.8,0l-88,49.5a8.1,8.1,0,0,0-4.1,7v98.6a8.1,8.1,0,0,0,4.1,7l88,49.5a7.8,7.8,0,0,0,7.8,0l88-49.5A8.1,8.1,0,0,0,224,177.3Z"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></path>
+                <polyline
+                  points="222.9 74.6 128.9 128 33.1 74.6"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></polyline>
+                <line
+                  x1="128.9"
+                  y1="128"
+                  x2="128"
+                  y2="234.8"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></line>
+              </svg>
+              <h2 class="area-heading">Hobbies</h2>
+            </div>
+            <ul class="project-list">
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <rect width="256" height="256" fill="none"></rect>
+                  <circle
+                    cx="128"
+                    cy="128"
+                    r="96"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></circle></svg
+                ><a href="#">Learn Basic Italian</a>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <rect width="256" height="256" fill="none"></rect>
+                  <circle
+                    cx="128"
+                    cy="128"
+                    r="96"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></circle></svg
+                ><a href="#">Run a Marathon</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="dropdown">
+          <div class="dropdown-menu">
+            <button class="dropdown-new">
+              <div class="dropdown-title">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <rect width="256" height="256" fill="none"></rect>
+                  <circle
+                    cx="128"
+                    cy="128"
+                    r="96"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></circle>
+                </svg>
+                <p class="dropdown-heading">New Project</p>
+              </div>
+              <p class="dropdown-description">
+                Define a goal, then work towards it one to-do at a time.
+              </p>
+            </button>
+
+            <button class="dropdown-new">
+              <div class="dropdown-title">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#000000"
+                  viewBox="0 0 256 256"
+                >
+                  <rect width="256" height="256" fill="none"></rect>
+                  <path
+                    d="M224,177.3V78.7a8.1,8.1,0,0,0-4.1-7l-88-49.5a7.8,7.8,0,0,0-7.8,0l-88,49.5a8.1,8.1,0,0,0-4.1,7v98.6a8.1,8.1,0,0,0,4.1,7l88,49.5a7.8,7.8,0,0,0,7.8,0l88-49.5A8.1,8.1,0,0,0,224,177.3Z"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></path>
+                  <polyline
+                    points="222.9 74.6 128.9 128 33.1 74.6"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></polyline>
+                  <line
+                    x1="128.9"
+                    y1="128"
+                    x2="128"
+                    y2="234.8"
+                    fill="none"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="16"
+                  ></line>
+                </svg>
+                <p class="dropdown-heading">New Area</p>
+              </div>
+              <p class="dropdown-description">
+                Group your project and to-dos based on different
+                responsibilites, such as Family or Work.
+              </p>
+            </button>
+          </div>
+
+          <button class="dropdown-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="#000000"
+              viewBox="0 0 256 256"
+            >
+              <rect width="256" height="256" fill="none"></rect>
+              <line
+                x1="40"
+                y1="128"
+                x2="216"
+                y2="128"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              ></line>
+              <line
+                x1="128"
+                y1="40"
+                x2="128"
+                y2="216"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              ></line>
+            </svg>
+
+            <span>New List</span>
+          </button>
+        </div>
+      </nav>
+
+      <section class="project-content">
+        <h3 class="project-heading">Vacation in Rome</h3>
+        <p class="project-description">
+          We'll go from June 14-22 and stop through London on the way back to
+          visit Jane and Paolo. Monti looks like a great place to stay. Maybe do
+          a night out in Trastevere.
+        </p>
+
+        <div class="project-subtasks">
+          <h4 class="subtasks-heading">Planning</h4>
+          <ul class="subtasks-list">
+            <li class="subtasks-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <rect width="256" height="256" fill="none"></rect>
+                <polyline
+                  points="172 104 113.3 160 84 132"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></polyline>
+                <rect
+                  x="40"
+                  y="40"
+                  width="176"
+                  height="176"
+                  rx="8"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></rect>
+              </svg>
+              <p>Book flights</p>
+            </li>
+            <li class="subtasks-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <rect width="256" height="256" fill="none"></rect>
+                <rect
+                  x="40"
+                  y="40"
+                  width="176"
+                  height="176"
+                  rx="8"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></rect>
+              </svg>
+              <p>Read about the metro</p>
+            </li>
+            <li class="subtasks-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <rect width="256" height="256" fill="none"></rect>
+                <rect
+                  x="40"
+                  y="40"
+                  width="176"
+                  height="176"
+                  rx="8"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></rect>
+              </svg>
+              <p>Borrow Sarah's travel guide</p>
+            </li>
+            <li class="subtasks-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <rect width="256" height="256" fill="none"></rect>
+                <rect
+                  x="40"
+                  y="40"
+                  width="176"
+                  height="176"
+                  rx="8"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="16"
+                ></rect>
+              </svg>
+              <p>Book a hotel room</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
