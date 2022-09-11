@@ -9,12 +9,16 @@ function* generateId() {
 const generatorObject = generateId();
 
 export const state = {
-  selectedProjectId: 2,
+  selectedProjectId: 1,
 
   getSelectedProject() {
     return this.projectList.find(
-      (project) => project.id.value === this.selectedProjectId
+      (project) => project.id === this.selectedProjectId
     );
+  },
+
+  setSelectedProject(newId) {
+    this.selectedProjectId = +newId;
   },
 
   areas: ['Family', 'Work'],
@@ -22,7 +26,7 @@ export const state = {
   projectList: [
     {
       area: 'Family',
-      id: generatorObject.next(),
+      id: generatorObject.next().value,
       heading: 'Vacation in Rome',
       description: `We'll go from June 14-22 and stop through London on the way back to visit Jane and Paolo. Monti looks like a great place to stay. Maybe do a night out in Trastevere.`,
       subtasks: [
@@ -40,7 +44,7 @@ export const state = {
 
     {
       area: 'Work',
-      id: generatorObject.next(),
+      id: generatorObject.next().value,
       heading: 'Prepare presentation',
       description: `Work till death`,
       subtasks: [

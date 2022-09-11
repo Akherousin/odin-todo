@@ -67,6 +67,14 @@ class NavView {
     this.parentElement.innerHTML = '';
   }
 
+  handleNewSelectedProject(handler) {
+    this.parentElement.addEventListener('click', function (e) {
+      const project = e.target.closest('[data-id]');
+      if (!project) return;
+      handler(project.dataset.id);
+    });
+  }
+
   generateMarkup(state) {
     return `${state.areas
       .map(
@@ -89,7 +97,7 @@ class NavView {
       .map((project) =>
         project.area === area
           ? ` 
-      <li>
+      <li data-id='${project.id}'>
       ${circleSvg}
       <a href='#'>${project.heading}</a>
       </li>
