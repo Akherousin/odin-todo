@@ -93,7 +93,7 @@ class NavView {
         (project) => `
       <li>
       ${circleSvg}
-      <a href='#'>${project}</a>
+      <a href='#'>${project.heading}</a>
       </li>
 
       `
