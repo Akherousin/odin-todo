@@ -4,5 +4,5 @@ import projectView from './view/ProjectView';
 
 export const init = function () {
   navView.render(model.state);
-  projectView.render(model.state.areas[0].projectList[1]);
+  projectView.render(model.state.getSelectedProject());
 };

@@ -53,8 +53,8 @@ viewBox="0 0 256 256"
 class ProjectView {
   parentElement = document.querySelector('.project-content');
 
-  render(state) {
-    const markup = this.generateMarkup(state);
+  render(project) {
+    const markup = this.generateMarkup(project);
     this.clear();
     this.parentElement.insertAdjacentHTML('afterbegin', markup);
   }

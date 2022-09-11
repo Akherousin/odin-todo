@@ -1,6 +1,3 @@
-// import boxSvg from '../../img/box.svg';
-// import circleSvg from '../../img/circle.svg';
-
 const boxSvg = `<svg xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
@@ -77,26 +74,27 @@ class NavView {
       <li class='area-item'>
       <div class='area-title'>
           ${boxSvg}
-          <h2 class='area-heading'>${area.title}</h2>
+          <h2 class='area-heading'>${area}</h2>
       </div>
       <ul class='project-list'>
-      ${this.generateProjectList(area)}
+      ${this.generateProjectList(area, state.projectList)}
       </ul>
       </li>`
       )
       .join('')}`;
   }
 
-  generateProjectList(area) {
-    return `${area.projectList
-      .map(
-        (project) => `
+  generateProjectList(area, projectList) {
+    return `${projectList
+      .map((project) =>
+        project.area === area
+          ? ` 
       <li>
       ${circleSvg}
       <a href='#'>${project.heading}</a>
       </li>
-
       `
+          : ''
       )
       .join('')}`;
   }
