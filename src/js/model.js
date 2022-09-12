@@ -11,16 +11,6 @@ const generatorObject = generateId();
 export const state = {
   selectedProjectId: 1,
 
-  getSelectedProject() {
-    return this.projectList.find(
-      (project) => project.id === this.selectedProjectId
-    );
-  },
-
-  setSelectedProject(newId) {
-    this.selectedProjectId = +newId;
-  },
-
   areas: ['Family', 'Work'],
 
   projectList: [
@@ -60,4 +50,18 @@ export const state = {
       ],
     },
   ],
+};
+
+export const setSelectedProject = function (newId) {
+  state.selectedProjectId = +newId;
+};
+
+export const getSelectedProject = function () {
+  return state.projectList.find(
+    (project) => project.id === state.selectedProjectId
+  );
+};
+
+export const addNewArea = function (area) {
+  state.areas.push(area);
 };
