@@ -76,6 +76,7 @@ class ProjectView {
   }
 
   generateSubtasks(subtasks) {
+    if (!subtasks) return;
     return subtasks.map(
       (subtask) => `
     <h4 class="subtasks-heading">${subtask.heading}</h4>

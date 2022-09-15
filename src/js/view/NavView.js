@@ -92,8 +92,14 @@ class NavView {
 
   generateMarkup(state) {
     return `${state.areas
-      .map(
-        (area) => `
+      .map((area) =>
+        area === ''
+          ? `<li class='area-item' data-area='${area}'>
+          <ul class='project-list'>
+          ${this.generateProjectList(area, state.projectList)}
+          </ul>
+          </li>`
+          : `
       <li class='area-item' data-area='${area}'>
       <div class='area-title'>
           ${boxSvg}

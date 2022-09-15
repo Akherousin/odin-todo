@@ -10,13 +10,18 @@ function controlSelectedProject(newId) {
   projectView.render(model.getSelectedProject());
 }
 
+function controlSelectedArea(newArea) {
+  model.changeSelectedArea(newArea);
+}
+
 function controlAddNewArea(newArea) {
   model.addNewArea(newArea);
   navView.render(state);
 }
 
-function controlSelectedArea(newArea) {
-  model.changeSelectedArea(newArea);
+function controlAddNewProject(newProject) {
+  model.addNewProject(newProject);
+  navView.render(state);
 }
 
 export const init = function () {
@@ -24,6 +29,7 @@ export const init = function () {
   projectView.render(model.getSelectedProject());
   navView.handleNewSelectedProject(controlSelectedProject);
   addNewView.addNewViewHandler('area', controlAddNewArea);
+  addNewView.addNewViewHandler('project', controlAddNewProject);
   navView.handleNewSelectedArea(controlSelectedArea);
 
   //   addNewView.addNewViewHandler('project');

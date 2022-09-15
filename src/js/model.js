@@ -8,11 +8,21 @@ function* generateId() {
 
 const generatorObject = generateId();
 
+function projectMaker(heading = '', description = '', area = '') {
+  return {
+    area,
+    id: generatorObject.next().value,
+    heading,
+    description,
+  };
+}
+
 export const state = {
   selectedArea: null,
   selectedProjectId: 1,
 
-  areas: ['Family', 'Work'],
+  // the empty string makes the unsorted projects part
+  areas: ['Family', 'Work', ''],
 
   projectList: [
     {
@@ -70,4 +80,9 @@ export const addNewArea = function (area) {
 export const changeSelectedArea = function (area) {
   if (!state.areas.includes(area)) return;
   state.selectedArea = area;
+};
+
+export const addNewProject = function (heading, description, area) {
+  state.projectList.push(projectMaker(heading, description, area));
+  console.log(state.projectList);
 };
