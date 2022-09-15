@@ -21,7 +21,7 @@ export const state = {
   selectedArea: null,
   selectedProjectId: 1,
 
-  // the empty string makes the unsorted projects part
+  // the empty string makes the unsorted 'default' area
   areas: ['Family', 'Work', ''],
 
   projectList: [
@@ -74,7 +74,7 @@ export const getSelectedProject = function () {
 };
 
 export const addNewArea = function (area) {
-  state.areas.push(area);
+  state.areas = [...state.areas.slice(0, -1), area, ''];
 };
 
 export const changeSelectedArea = function (area) {
@@ -85,4 +85,11 @@ export const changeSelectedArea = function (area) {
 export const addNewProject = function (heading, description, area) {
   state.projectList.push(projectMaker(heading, description, area));
   console.log(state.projectList);
+};
+
+export const changeProjectArea = function (project, area) {
+  const projectToChange = state.projectList.find(
+    (proj) => proj.id === Number(project.dataset.id)
+  );
+  projectToChange.area = area;
 };

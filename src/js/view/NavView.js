@@ -1,3 +1,5 @@
+import { getDragAfterElement } from '../utilities';
+
 const boxSvg = `<svg xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
@@ -90,6 +92,38 @@ class NavView {
     });
   }
 
+  handleDraggable(handler) {
+    const draggables = document.querySelectorAll('[data-draggable]');
+    const areas = document.querySelectorAll('.area-item');
+
+    draggables.forEach((draggable) => {
+      draggable.addEventListener('dragstart', () => {
+        draggable.classList.add('dragging');
+      });
+
+      draggable.addEventListener('dragend', () => {
+        draggable.classList.remove('dragging');
+      });
+    });
+
+    areas.forEach((currentArea) => {
+      currentArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+
+        const currentDraggable = document.querySelector('.dragging');
+        const currentList = currentArea.querySelector('.project-list');
+        const afterElement = getDragAfterElement(currentList, e.clientY);
+
+        if (afterElement === null) {
+          currentList.appendChild(currentDraggable);
+        } else {
+          currentList.insertBefore(currentDraggable, afterElement);
+        }
+        handler(currentDraggable, currentArea.dataset.area);
+      });
+    });
+  }
+
   generateMarkup(state) {
     return `${state.areas
       .map((area) =>
@@ -118,7 +152,7 @@ class NavView {
       .map((project) =>
         project.area === area
           ? ` 
-      <li data-id='${project.id}'>
+      <li data-id='${project.id}' data-draggable draggable='true'>
       ${circleSvg}
       <a href='#'>${project.heading}</a>
       </li>

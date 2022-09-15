@@ -22,6 +22,11 @@ function controlAddNewArea(newArea) {
 function controlAddNewProject(newProject) {
   model.addNewProject(newProject);
   navView.render(state);
+  navView.handleDraggable(controlDragProject);
+}
+
+function controlDragProject(draggedProject, area) {
+  model.changeProjectArea(draggedProject, area);
 }
 
 export const init = function () {
@@ -31,6 +36,5 @@ export const init = function () {
   addNewView.addNewViewHandler('area', controlAddNewArea);
   addNewView.addNewViewHandler('project', controlAddNewProject);
   navView.handleNewSelectedArea(controlSelectedArea);
-
-  //   addNewView.addNewViewHandler('project');
+  navView.handleDraggable(controlDragProject);
 };
