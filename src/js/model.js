@@ -9,6 +9,7 @@ function* generateId() {
 const generatorObject = generateId();
 
 export const state = {
+  selectedArea: null,
   selectedProjectId: 1,
 
   areas: ['Family', 'Work'],
@@ -64,4 +65,9 @@ export const getSelectedProject = function () {
 
 export const addNewArea = function (area) {
   state.areas.push(area);
+};
+
+export const changeSelectedArea = function (area) {
+  if (!state.areas.includes(area)) return;
+  state.selectedArea = area;
 };

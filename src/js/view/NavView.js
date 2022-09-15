@@ -75,11 +75,26 @@ class NavView {
     });
   }
 
+  handleNewSelectedArea(handler) {
+    const areasList = document.querySelector('.areas-list');
+    areasList.addEventListener('click', function (e) {
+      const selectedArea = e.target.closest('[data-area]');
+      if (!selectedArea) return;
+      const areasAll = document.querySelectorAll('.area-item');
+      selectedArea.classList.add('area-item-selected');
+      areasAll.forEach((area) => {
+        if (area !== selectedArea) area.classList.remove('area-item-selected');
+      });
+
+      handler(selectedArea.dataset.area);
+    });
+  }
+
   generateMarkup(state) {
     return `${state.areas
       .map(
         (area) => `
-      <li class='area-item'>
+      <li class='area-item' data-area='${area}'>
       <div class='area-title'>
           ${boxSvg}
           <h2 class='area-heading'>${area}</h2>

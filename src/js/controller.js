@@ -15,11 +15,16 @@ function controlAddNewArea(newArea) {
   navView.render(state);
 }
 
+function controlSelectedArea(newArea) {
+  model.changeSelectedArea(newArea);
+}
+
 export const init = function () {
   navView.render(state);
   projectView.render(model.getSelectedProject());
   navView.handleNewSelectedProject(controlSelectedProject);
   addNewView.addNewViewHandler('area', controlAddNewArea);
+  navView.handleNewSelectedArea(controlSelectedArea);
 
   //   addNewView.addNewViewHandler('project');
 };
