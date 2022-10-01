@@ -1,54 +1,6 @@
-const checkedBox = `<svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="#000000"
-                  viewBox="0 0 256 256"
-                >
-                  <rect width="256" height="256" fill="none"></rect>
-                  <polyline
-                    points="172 104 113.3 160 84 132"
-                    fill="none"
-                    stroke="#000000"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="16"
-                  ></polyline>
-                  <rect
-                    x="40"
-                    y="40"
-                    width="176"
-                    height="176"
-                    rx="8"
-                    fill="none"
-                    stroke="#000000"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="16"
-                  ></rect>
-                </svg>`;
+import { generateId } from '../utilities';
 
-const uncheckedBox = `<svg
-xmlns="http://www.w3.org/2000/svg"
-width="20"
-height="20"
-fill="#000000"
-viewBox="0 0 256 256"
->
-<rect width="256" height="256" fill="none"></rect>
-<rect
-  x="40"
-  y="40"
-  width="176"
-  height="176"
-  rx="8"
-  fill="none"
-  stroke="#000000"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  stroke-width="16"
-></rect>
-</svg>`;
+const generatorObject = generateId();
 
 class ProjectView {
   parentElement = document.querySelector('.project-content');
@@ -99,6 +51,46 @@ class ProjectView {
     });
   }
 
+  handleAddNewSubtask(handler) {
+    const btnCreate = document.querySelector('.subtask-new');
+
+    btnCreate.addEventListener('click', (e) => {
+      const ulEl = document
+        .querySelector(`[data-group=${e.target.dataset.group}]`)
+        .querySelector('.subtasks-list');
+
+      const newSubtask = document.createElement('li');
+      newSubtask.classList.add('subtasks-item');
+      const newInput = document.createElement('input');
+      const newTaskId = `newtask-${generatorObject.next().value}`;
+
+      newInput.setAttribute('type', 'checkbox');
+      newInput.setAttribute('id', newTaskId);
+
+      const newLabel = document.createElement('label');
+      newLabel.setAttribute('for', newTaskId);
+      newLabel.textContent = 'New Task';
+      newLabel.setAttribute('contenteditable', true);
+
+      newSubtask.appendChild(newInput);
+      newSubtask.appendChild(newLabel);
+
+      ulEl.appendChild(newSubtask);
+      newLabel.focus();
+
+      newLabel.addEventListener('blur', (e) => {
+        newLabel.setAttribute('contenteditable', false);
+
+        if (e.target.innerText.trim() === '') {
+          newSubtask.remove();
+        } else {
+          // add new subtask to the list
+          handler(ulEl.dataset.group, e.target.innerText.trim());
+        }
+      });
+    });
+  }
+
   generateMarkup(project) {
     return `
     <h3 class="project-heading" contenteditable="true" data-type="heading">${
@@ -111,7 +103,7 @@ class ProjectView {
       ${this.generateSubtasks(project.subtasks)}
     
     </div>
-    <button class='subtasks-create'>create group</button>
+      <button class='subtasks-create'>create group</button>
     `;
   }
 
@@ -119,19 +111,26 @@ class ProjectView {
     if (!subtasks) return '';
     return subtasks.map(
       (subtask) => `
-    <h4 class="subtasks-heading">${subtask.heading}</h4>
-    <ul class="subtasks-list">
+      <div data-group='${subtask.heading.toLowerCase()}'>
+      <h4 class="subtasks-heading">${subtask.heading}</h4>
+      <ul class="subtasks-list" data-group='${subtask.heading.toLowerCase()}'>
       ${subtask.list
         .map(
           (item) => `
-      <li class="subtasks-item">
-      ${item.completed ? checkedBox : uncheckedBox}
-      <p>${item.subtask}</p>`
+          <li class="subtasks-item">
+            <input type='checkbox' id='${item.subtask}' ${
+            item.completed ? 'checked' : ''
+          }>
+            <label for='${item.subtask}'>${item.subtask}</label>
+          </li>
+          `
         )
         .join('')}
-    
-    </ul>
-
+          
+          </ul>
+          <button class='subtask-new' data-group='${subtask.heading.toLowerCase()}'>+</button>
+      </div>
+          
     `
     );
   }

@@ -44,5 +44,22 @@
     left: 0;
     border-top: 1px solid $color-bg-dark-2;
     border-left: 1px solid $color-bg-dark-2;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: $color-bg-dark-1;
+    }
+  }
+}
+
+.subtask-new {
+  cursor: pointer;
+  border: none;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: $color-bg-dark-1;
   }
 }

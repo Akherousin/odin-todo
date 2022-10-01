@@ -1,10 +1,4 @@
-function* generateId() {
-  let id = 1;
-  while (true) {
-    yield id;
-    id++;
-  }
-}
+import { generateId } from './utilities';
 
 const generatorObject = generateId();
 
@@ -107,6 +101,16 @@ export const addNewSubtasksGroup = function (newGroupName) {
     list: [],
   };
 
+  if (!project.subtasks) project.subtasks = [];
+
   project.subtasks.push(newGroup);
   console.log(state);
+};
+
+export const addNewSubtask = function (groupNeeded, subtask) {
+  const project = getSelectedProject();
+  const group = project.subtasks.find(
+    (task) => task.heading.toLowerCase() === groupNeeded
+  ).list;
+  group.push({ subtask: subtask, completed: false });
 };

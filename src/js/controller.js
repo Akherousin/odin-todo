@@ -41,6 +41,10 @@ function controlCreateNewGroup(newGroupName) {
   model.addNewSubtasksGroup(newGroupName);
 }
 
+function controlCreateNewSubtask(tasksGroup, newSubtask) {
+  model.addNewSubtask(tasksGroup, newSubtask);
+}
+
 export const init = function () {
   navView.render(state);
   projectView.render(model.getSelectedProject());
@@ -51,4 +55,5 @@ export const init = function () {
   navView.handleDraggable(controlDragProject);
   projectView.handleEdit(controlEditData);
   projectView.handleCreateNewGroup(controlCreateNewGroup);
+  projectView.handleAddNewSubtask(controlCreateNewSubtask);
 };
