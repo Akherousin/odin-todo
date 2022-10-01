@@ -63,15 +63,55 @@ class ProjectView {
     this.parentElement.innerHTML = '';
   }
 
+  handleEdit(handler) {
+    const editableContent = document.querySelectorAll(
+      '[contenteditable="true"]'
+    );
+    editableContent.forEach((editable) =>
+      editable.addEventListener('blur', () => {
+        handler(editable.dataset.type, editable.textContent);
+      })
+    );
+  }
+
+  handleCreateNewGroup(handler) {
+    const btnCreate = document.querySelector('.subtasks-create');
+    const projects = document.querySelector('.project-subtasks');
+    btnCreate.addEventListener('click', () => {
+      const newHeading = document.createElement('h4');
+      newHeading.innerText = '';
+      newHeading.classList.add('subtasks-heading');
+      newHeading.setAttribute('contenteditable', true);
+      projects.appendChild(newHeading);
+      newHeading.focus();
+
+      // handle newInput
+      newHeading.addEventListener('blur', () => {
+        // if no name entered, destroy the new heading
+
+        if (newHeading.innerText.trim() === '') {
+          newHeading.remove();
+        } else {
+          // add new subtask group to the state
+          handler(newHeading.innerText.trim());
+        }
+      });
+    });
+  }
+
   generateMarkup(project) {
     return `
-    <h3 class="project-heading">${project.heading}</h3>
-    <p class="project-description">
+    <h3 class="project-heading" contenteditable="true" data-type="heading">${
+      project.heading
+    }</h3>
+    <p class="project-description" contenteditable="true" data-type="description">
       ${project.description}
     </p>
-    <div class="project-subtasks">
+    <div class="project-subtasks" >
       ${this.generateSubtasks(project.subtasks)}
+    
     </div>
+    <button class='subtasks-create'>create group</button>
     `;
   }
 

@@ -40,7 +40,8 @@ class AddNewView {
     <label for="${addNew}-name">Add new ${addNew}:</label>
     
     <input type="text" id="${addNew}-name" name="${addNew}-name" required
-    >
+    > 
+    
     </form>
       `;
   }

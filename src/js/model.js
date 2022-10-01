@@ -93,3 +93,20 @@ export const changeProjectArea = function (project, area) {
   );
   projectToChange.area = area;
 };
+
+export const changeProjectData = function (data, newData) {
+  const project = getSelectedProject();
+  project[data] = newData;
+  console.log(state.projectList);
+};
+
+export const addNewSubtasksGroup = function (newGroupName) {
+  const project = getSelectedProject();
+  const newGroup = {
+    heading: newGroupName,
+    list: [],
+  };
+
+  project.subtasks.push(newGroup);
+  console.log(state);
+};
