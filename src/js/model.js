@@ -32,22 +32,22 @@ export const state = {
             {
               subtask: 'Book flights',
               completed: true,
-              id: `subtask-${todoIdGenerator.next().value}`,
+              id: todoIdGenerator.next().value,
             },
             {
               subtask: 'Read about the metro',
               completed: false,
-              id: `subtask-${todoIdGenerator.next().value}`,
+              id: todoIdGenerator.next().value,
             },
             {
               subtask: "Borrow Sarah's travel guide",
               completed: false,
-              id: `subtask-${todoIdGenerator.next().value}`,
+              id: todoIdGenerator.next().value,
             },
             {
               subtask: 'Book a hotel room',
               completed: false,
-              id: `subtask-${todoIdGenerator.next().value}`,
+              id: todoIdGenerator.next().value,
             },
           ],
         },
@@ -66,22 +66,22 @@ export const state = {
             {
               subtask: 'Book flights',
               completed: false,
-              id: `subtask-${todoIdGenerator.next().value}`,
+              id: todoIdGenerator.next().value,
             },
             {
               subtask: 'Read about the metro',
               completed: false,
-              id: `subtask-${todoIdGenerator.next().value}`,
+              id: todoIdGenerator.next().value,
             },
             {
               subtask: "Borrow Sarah's travel guide",
               completed: false,
-              id: `subtask-${todoIdGenerator.next().value}`,
+              id: todoIdGenerator.next().value,
             },
             {
               subtask: 'Book a hotel room',
               completed: false,
-              id: `subtask-${todoIdGenerator.next().value}`,
+              id: todoIdGenerator.next().value,
             },
           ],
         },
@@ -98,6 +98,10 @@ export const getSelectedProject = function () {
   return state.projectList.find(
     (project) => project.id === state.selectedProjectId
   );
+};
+
+export const getCurrentSubtasks = function () {
+  return getSelectedProject().subtasks;
 };
 
 export const addNewArea = function (area) {
@@ -158,6 +162,9 @@ export const changeSubtaskStatus = function (groupNeeded, subtaskNeeded) {
     (task) => task.heading.toLowerCase() === groupNeeded
   ).list;
 
-  const subtask = group.find((subtask) => subtask.id === subtaskNeeded);
+  const subtask = group.find(
+    (subtask) => `subtask-${subtask.id}` === subtaskNeeded
+  );
+
   subtask.completed = !subtask.completed;
 };

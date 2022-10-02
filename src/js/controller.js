@@ -2,16 +2,41 @@ import * as model from './model';
 import addNewView from './view/AddNewView';
 import navView from './view/NavView';
 import projectView from './view/ProjectView';
+import groupView from './view/GroupView';
 
 const state = model.state;
 
 function controlSelectedProject(newId) {
+  // 1) Change selected project
   model.setSelectedProject(newId);
+
+  // 2) Render Project View
   projectView.render(model.getSelectedProject());
+
+  // 3) Handle text editing of heading and description of the project
   projectView.handleEdit(controlEditData);
-  projectView.handleCreateNewGroup(controlCreateNewGroup);
-  projectView.handleAddNewSubtask(controlCreateNewSubtask);
-  projectView.handleCheckboxChange(controlCheckboxChange);
+
+  // 4) Render groups of subtasks
+  groupView.render(model.getCurrentSubtasks());
+
+  // 5) Add new group of subtasks
+  groupView.handleCreateNewGroup(controlCreateNewGroup);
+
+  // 6) Create a new subtask in a group
+  groupView.handleAddNewSubtask(controlCreateNewSubtask);
+
+  // 7) Control checkbox changes
+  groupView.handleCheckboxChange(controlCheckboxChange);
+
+  console.log(
+    state.projectList.forEach((project) =>
+      project.subtasks.forEach((subtask) => console.table(subtask.list))
+    )
+  );
+
+  // projectView.handleCreateNewGroup(controlCreateNewGroup);
+  // projectView.handleAddNewSubtask(controlCreateNewSubtask);
+  // projectView.handleCheckboxChange(controlCheckboxChange);
 }
 
 function controlSelectedArea(newArea) {
@@ -41,31 +66,62 @@ function controlEditData(type, newData) {
 
 function controlCreateNewGroup(newGroupName) {
   model.addNewSubtasksGroup(newGroupName);
-  projectView.render(model.getSelectedProject());
-  projectView.handleAddNewSubtask(controlCreateNewSubtask);
+  groupView.render(model.getCurrentSubtasks());
+  groupView.handleAddNewSubtask(controlCreateNewSubtask);
+  groupView.handleCheckboxChange(controlCheckboxChange);
 
-  projectView.handleCreateNewGroup(controlCreateNewGroup);
+  console.log(
+    state.projectList.forEach((project) =>
+      project.subtasks.forEach((subtask) => console.table(subtask.list))
+    )
+  );
 }
 
 function controlCreateNewSubtask(tasksGroup, newSubtask, newSubtaskId) {
   model.addNewSubtask(tasksGroup, newSubtask, newSubtaskId);
-  projectView.handleCheckboxChange(controlCheckboxChange);
+
+  groupView.update(tasksGroup, {
+    subtask: newSubtask,
+    completed: false,
+    id: newSubtaskId,
+  });
+  groupView.handleCheckboxChange(controlCheckboxChange);
+
+  console.log(
+    state.projectList.forEach((project) =>
+      project.subtasks.forEach((subtask) => console.table(subtask.list))
+    )
+  );
 }
 
 function controlCheckboxChange(group, checkboxId) {
   model.changeSubtaskStatus(group, checkboxId);
+
+  console.log(
+    state.projectList.forEach((project) =>
+      project.subtasks.forEach((subtask) => console.table(subtask.list))
+    )
+  );
 }
 
 export const init = function () {
   navView.render(state);
   projectView.render(model.getSelectedProject());
+  groupView.render(model.getCurrentSubtasks());
+
   navView.handleNewSelectedProject(controlSelectedProject);
-  addNewView.addNewViewHandler('area', controlAddNewArea);
-  addNewView.addNewViewHandler('project', controlAddNewProject);
   navView.handleNewSelectedArea(controlSelectedArea);
   navView.handleDraggable(controlDragProject);
   projectView.handleEdit(controlEditData);
-  projectView.handleAddNewSubtask(controlCreateNewSubtask);
-  projectView.handleCreateNewGroup(controlCreateNewGroup);
-  projectView.handleCheckboxChange(controlCheckboxChange);
+
+  addNewView.addNewViewHandler('area', controlAddNewArea);
+  addNewView.addNewViewHandler('project', controlAddNewProject);
+
+  groupView.handleCreateNewGroup(controlCreateNewGroup);
+  groupView.handleAddNewSubtask(controlCreateNewSubtask);
+  groupView.handleCheckboxChange(controlCheckboxChange);
+
+  // projectView.handleAddNewSubtask(controlCreateNewSubtask);
+  // projectView.handleCreateNewGroup(controlCreateNewGroup);
+  // projectView.handleCheckboxChange(controlCheckboxChange);
 };
