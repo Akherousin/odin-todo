@@ -10,6 +10,7 @@ function controlSelectedProject(newId) {
   projectView.render(model.getSelectedProject());
   projectView.handleEdit(controlEditData);
   projectView.handleCreateNewGroup(controlCreateNewGroup);
+  projectView.handleAddNewSubtask(controlCreateNewSubtask);
 }
 
 function controlSelectedArea(newArea) {
@@ -39,6 +40,7 @@ function controlEditData(type, newData) {
 
 function controlCreateNewGroup(newGroupName) {
   model.addNewSubtasksGroup(newGroupName);
+  projectView.handleAddNewSubtask(controlCreateNewSubtask);
 }
 
 function controlCreateNewSubtask(tasksGroup, newSubtask) {
@@ -54,6 +56,6 @@ export const init = function () {
   navView.handleNewSelectedArea(controlSelectedArea);
   navView.handleDraggable(controlDragProject);
   projectView.handleEdit(controlEditData);
-  projectView.handleCreateNewGroup(controlCreateNewGroup);
   projectView.handleAddNewSubtask(controlCreateNewSubtask);
+  projectView.handleCreateNewGroup(controlCreateNewGroup);
 };

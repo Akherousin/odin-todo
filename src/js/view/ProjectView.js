@@ -29,12 +29,31 @@ class ProjectView {
   handleCreateNewGroup(handler) {
     const btnCreate = document.querySelector('.subtasks-create');
     const projects = document.querySelector('.project-subtasks');
+
     btnCreate.addEventListener('click', () => {
+      const newGroupId = `newgroup-${generatorObject.next().value}`;
+
+      const newGroup = document.createElement('div');
+      newGroup.setAttribute('data-group', newGroupId);
+
       const newHeading = document.createElement('h4');
       newHeading.innerText = '';
       newHeading.classList.add('subtasks-heading');
       newHeading.setAttribute('contenteditable', true);
-      projects.appendChild(newHeading);
+
+      const newUl = document.createElement('ul');
+      newUl.classList.add('subtasks-list');
+      newUl.setAttribute('data-group', newGroupId);
+
+      const newBtn = document.createElement('button');
+      newBtn.innerText = '+';
+      newBtn.classList.add('subtask-new');
+      newBtn.setAttribute('data-group', newGroupId);
+
+      newGroup.appendChild(newHeading);
+      newGroup.appendChild(newUl);
+      newGroup.appendChild(newBtn);
+      projects.appendChild(newGroup);
       newHeading.focus();
 
       // handle newInput
@@ -42,8 +61,13 @@ class ProjectView {
         // if no name entered, destroy the new heading
 
         if (newHeading.innerText.trim() === '') {
-          newHeading.remove();
+          newGroup.remove();
         } else {
+          // change attributes according to new group name
+          newGroup.setAttribute('data-group', newHeading.innerText.trim());
+          newUl.setAttribute('data-group', newHeading.innerText.trim());
+          newBtn.setAttribute('data-group', newHeading.innerText.trim());
+
           // add new subtask group to the state
           handler(newHeading.innerText.trim());
         }
@@ -52,42 +76,55 @@ class ProjectView {
   }
 
   handleAddNewSubtask(handler) {
-    const btnCreate = document.querySelector('.subtask-new');
+    const btnsCreate = document.querySelectorAll('.subtask-new');
+    if (!btnsCreate) return;
 
-    btnCreate.addEventListener('click', (e) => {
-      const ulEl = document
-        .querySelector(`[data-group=${e.target.dataset.group}]`)
-        .querySelector('.subtasks-list');
+    const handleClick = function (e) {
+      this.clickBtnNewTask(e, handler);
+    }.bind(this);
 
-      const newSubtask = document.createElement('li');
-      newSubtask.classList.add('subtasks-item');
-      const newInput = document.createElement('input');
-      const newTaskId = `newtask-${generatorObject.next().value}`;
+    btnsCreate.forEach((btn) => {
+      btn.onclick = handleClick;
+    });
+  }
 
-      newInput.setAttribute('type', 'checkbox');
-      newInput.setAttribute('id', newTaskId);
+  clickBtnNewTask(e, handler) {
+    const divEl = document.querySelector(
+      `[data-group=${e.target.dataset.group}]`
+    );
 
-      const newLabel = document.createElement('label');
-      newLabel.setAttribute('for', newTaskId);
-      newLabel.textContent = 'New Task';
-      newLabel.setAttribute('contenteditable', true);
+    const ulEl = divEl.querySelector('.subtasks-list');
 
-      newSubtask.appendChild(newInput);
-      newSubtask.appendChild(newLabel);
+    const newSubtask = document.createElement('li');
+    newSubtask.classList.add('subtasks-item');
+    const newInput = document.createElement('input');
+    const newTaskId = `newtask-${generatorObject.next().value}`;
 
-      ulEl.appendChild(newSubtask);
-      newLabel.focus();
+    newInput.setAttribute('type', 'checkbox');
+    newInput.setAttribute('id', newTaskId);
 
-      newLabel.addEventListener('blur', (e) => {
-        newLabel.setAttribute('contenteditable', false);
+    const newLabel = document.createElement('label');
+    newLabel.setAttribute('for', newTaskId);
+    newLabel.textContent = 'New Task';
+    newLabel.setAttribute('contenteditable', true);
 
-        if (e.target.innerText.trim() === '') {
-          newSubtask.remove();
-        } else {
-          // add new subtask to the list
-          handler(ulEl.dataset.group, e.target.innerText.trim());
-        }
-      });
+    newSubtask.appendChild(newInput);
+    newSubtask.appendChild(newLabel);
+
+    ulEl.appendChild(newSubtask);
+    newLabel.focus();
+
+    newLabel.addEventListener('blur', (e) => {
+      newLabel.setAttribute('contenteditable', false);
+      const newHeading = e.target.innerText.trim();
+
+      if (newHeading === '') {
+        newSubtask.remove();
+      } else {
+        // add new subtask to the list
+
+        handler(ulEl.dataset.group, newHeading);
+      }
     });
   }
 
@@ -100,7 +137,7 @@ class ProjectView {
       ${project.description}
     </p>
     <div class="project-subtasks" >
-      ${this.generateSubtasks(project.subtasks)}
+      ${this.generateSubtasks(project.subtasks).join('')}
     
     </div>
       <button class='subtasks-create'>create group</button>

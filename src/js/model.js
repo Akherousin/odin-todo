@@ -8,6 +8,7 @@ function projectMaker(heading = '', description = '', area = '') {
     id: generatorObject.next().value,
     heading,
     description,
+    subtasks: [],
   };
 }
 
