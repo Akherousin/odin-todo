@@ -41,7 +41,10 @@ function controlEditData(type, newData) {
 
 function controlCreateNewGroup(newGroupName) {
   model.addNewSubtasksGroup(newGroupName);
+  projectView.render(model.getSelectedProject());
   projectView.handleAddNewSubtask(controlCreateNewSubtask);
+
+  projectView.handleCreateNewGroup(controlCreateNewGroup);
 }
 
 function controlCreateNewSubtask(tasksGroup, newSubtask, newSubtaskId) {

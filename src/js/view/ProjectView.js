@@ -31,46 +31,21 @@ class ProjectView {
     const projects = document.querySelector('.project-subtasks');
 
     btnCreate.addEventListener('click', () => {
-      const newGroupId = `newgroup-${generatorObject.next().value}`;
+      const newForm = document.createElement('form');
+      const newInput = document.createElement('input');
+      newForm.appendChild(newInput);
+      projects.appendChild(newForm);
 
-      const newGroup = document.createElement('div');
-      newGroup.setAttribute('data-group', newGroupId);
+      newInput.focus();
 
-      const newHeading = document.createElement('h4');
-      newHeading.innerText = '';
-      newHeading.classList.add('subtasks-heading');
-      newHeading.setAttribute('contenteditable', true);
+      newForm.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-      const newUl = document.createElement('ul');
-      newUl.classList.add('subtasks-list');
-      newUl.setAttribute('data-group', newGroupId);
+        const newGroupName = e.target[0].value;
+        if (!e.target[0].value) return;
 
-      const newBtn = document.createElement('button');
-      newBtn.innerText = '+';
-      newBtn.classList.add('subtask-new');
-      newBtn.setAttribute('data-group', newGroupId);
-
-      newGroup.appendChild(newHeading);
-      newGroup.appendChild(newUl);
-      newGroup.appendChild(newBtn);
-      projects.appendChild(newGroup);
-      newHeading.focus();
-
-      // handle newInput
-      newHeading.addEventListener('blur', () => {
-        // if no name entered, destroy the new heading
-
-        if (newHeading.innerText.trim() === '') {
-          newGroup.remove();
-        } else {
-          // change attributes according to new group name
-          newGroup.setAttribute('data-group', newHeading.innerText.trim());
-          newUl.setAttribute('data-group', newHeading.innerText.trim());
-          newBtn.setAttribute('data-group', newHeading.innerText.trim());
-
-          // add new subtask group to the state
-          handler(newHeading.innerText.trim());
-        }
+        handler(newGroupName);
+        projects.removeChild(newForm);
       });
     });
   }
@@ -186,3 +161,52 @@ class ProjectView {
 }
 
 export default new ProjectView();
+
+// handleCreateNewGroup(handler) {
+//   const btnCreate = document.querySelector('.subtasks-create');
+//   const projects = document.querySelector('.project-subtasks');
+
+//   btnCreate.addEventListener('click', () => {
+//     const newGroupId = `newgroup-${generatorObject.next().value}`;
+
+//     const newGroup = document.createElement('div');
+//     newGroup.setAttribute('data-group', newGroupId);
+
+//     const newHeading = document.createElement('h4');
+//     newHeading.innerText = '';
+//     newHeading.classList.add('subtasks-heading');
+//     newHeading.setAttribute('contenteditable', true);
+
+//     const newUl = document.createElement('ul');
+//     newUl.classList.add('subtasks-list');
+//     newUl.setAttribute('data-group', newGroupId);
+
+//     const newBtn = document.createElement('button');
+//     newBtn.innerText = '+';
+//     newBtn.classList.add('subtask-new');
+//     newBtn.setAttribute('data-group', newGroupId);
+
+//     newGroup.appendChild(newHeading);
+//     newGroup.appendChild(newUl);
+//     newGroup.appendChild(newBtn);
+//     projects.appendChild(newGroup);
+//     newHeading.focus();
+
+//     // handle newInput
+//     newHeading.addEventListener('blur', () => {
+//       // if no name entered, destroy the new heading
+
+//       if (newHeading.innerText.trim() === '') {
+//         newGroup.remove();
+//       } else {
+//         // change attributes according to new group name
+//         newGroup.setAttribute('data-group', newHeading.innerText.trim());
+//         newUl.setAttribute('data-group', newHeading.innerText.trim());
+//         newBtn.setAttribute('data-group', newHeading.innerText.trim());
+
+//         // add new subtask group to the state
+//         handler(newHeading.innerText.trim());
+//       }
+//     });
+//   });
+// }
