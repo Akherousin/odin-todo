@@ -11,6 +11,7 @@ function controlSelectedProject(newId) {
   projectView.handleEdit(controlEditData);
   projectView.handleCreateNewGroup(controlCreateNewGroup);
   projectView.handleAddNewSubtask(controlCreateNewSubtask);
+  projectView.handleCheckboxChange(controlCheckboxChange);
 }
 
 function controlSelectedArea(newArea) {
@@ -43,8 +44,13 @@ function controlCreateNewGroup(newGroupName) {
   projectView.handleAddNewSubtask(controlCreateNewSubtask);
 }
 
-function controlCreateNewSubtask(tasksGroup, newSubtask) {
-  model.addNewSubtask(tasksGroup, newSubtask);
+function controlCreateNewSubtask(tasksGroup, newSubtask, newSubtaskId) {
+  model.addNewSubtask(tasksGroup, newSubtask, newSubtaskId);
+  projectView.handleCheckboxChange(controlCheckboxChange);
+}
+
+function controlCheckboxChange(group, checkboxId) {
+  model.changeSubtaskStatus(group, checkboxId);
 }
 
 export const init = function () {
@@ -58,4 +64,5 @@ export const init = function () {
   projectView.handleEdit(controlEditData);
   projectView.handleAddNewSubtask(controlCreateNewSubtask);
   projectView.handleCreateNewGroup(controlCreateNewGroup);
+  projectView.handleCheckboxChange(controlCheckboxChange);
 };

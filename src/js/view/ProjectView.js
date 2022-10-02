@@ -1,4 +1,4 @@
-import { generateId } from '../utilities';
+import { generateId, todoIdGenerator } from '../utilities';
 
 const generatorObject = generateId();
 
@@ -98,10 +98,11 @@ class ProjectView {
     const newSubtask = document.createElement('li');
     newSubtask.classList.add('subtasks-item');
     const newInput = document.createElement('input');
-    const newTaskId = `newtask-${generatorObject.next().value}`;
+    const newTaskId = `subtask-${todoIdGenerator.next().value}`;
 
     newInput.setAttribute('type', 'checkbox');
     newInput.setAttribute('id', newTaskId);
+    newInput.classList.add('subtask-checkbox');
 
     const newLabel = document.createElement('label');
     newLabel.setAttribute('for', newTaskId);
@@ -123,9 +124,20 @@ class ProjectView {
       } else {
         // add new subtask to the list
 
-        handler(ulEl.dataset.group, newHeading);
+        handler(ulEl.dataset.group, newHeading, newTaskId);
       }
     });
+  }
+
+  handleCheckboxChange(handler) {
+    const checkboxes = document.querySelectorAll('.subtask-checkbox');
+
+    checkboxes.forEach((checkbox) =>
+      checkbox.addEventListener('change', () => {
+        const group = checkbox.closest('.subtasks-list').dataset.group;
+        handler(group, checkbox.id);
+      })
+    );
   }
 
   generateMarkup(project) {
@@ -155,10 +167,10 @@ class ProjectView {
         .map(
           (item) => `
           <li class="subtasks-item">
-            <input type='checkbox' id='${item.subtask}' ${
+            <input type='checkbox' id='${item.id}' class='subtask-checkbox' ${
             item.completed ? 'checked' : ''
           }>
-            <label for='${item.subtask}'>${item.subtask}</label>
+            <label for='${item.id}'>${item.subtask}</label>
           </li>
           `
         )

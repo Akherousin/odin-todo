@@ -1,4 +1,4 @@
-import { generateId } from './utilities';
+import { generateId, todoIdGenerator } from './utilities';
 
 const generatorObject = generateId();
 
@@ -29,10 +29,26 @@ export const state = {
         {
           heading: 'Planning',
           list: [
-            { subtask: 'Book flights', completed: true },
-            { subtask: 'Read about the metro', completed: false },
-            { subtask: "Borrow Sarah's travel guide", completed: false },
-            { subtask: 'Book a hotel room', completed: false },
+            {
+              subtask: 'Book flights',
+              completed: true,
+              id: `subtask-${todoIdGenerator.next().value}`,
+            },
+            {
+              subtask: 'Read about the metro',
+              completed: false,
+              id: `subtask-${todoIdGenerator.next().value}`,
+            },
+            {
+              subtask: "Borrow Sarah's travel guide",
+              completed: false,
+              id: `subtask-${todoIdGenerator.next().value}`,
+            },
+            {
+              subtask: 'Book a hotel room',
+              completed: false,
+              id: `subtask-${todoIdGenerator.next().value}`,
+            },
           ],
         },
       ],
@@ -47,10 +63,26 @@ export const state = {
         {
           heading: 'Planning',
           list: [
-            { subtask: 'Book flights', completed: false },
-            { subtask: 'Read about the metro', completed: false },
-            { subtask: "Borrow Sarah's travel guide", completed: false },
-            { subtask: 'Book a hotel room', completed: false },
+            {
+              subtask: 'Book flights',
+              completed: false,
+              id: `subtask-${todoIdGenerator.next().value}`,
+            },
+            {
+              subtask: 'Read about the metro',
+              completed: false,
+              id: `subtask-${todoIdGenerator.next().value}`,
+            },
+            {
+              subtask: "Borrow Sarah's travel guide",
+              completed: false,
+              id: `subtask-${todoIdGenerator.next().value}`,
+            },
+            {
+              subtask: 'Book a hotel room',
+              completed: false,
+              id: `subtask-${todoIdGenerator.next().value}`,
+            },
           ],
         },
       ],
@@ -108,10 +140,24 @@ export const addNewSubtasksGroup = function (newGroupName) {
   console.log(state);
 };
 
-export const addNewSubtask = function (groupNeeded, subtask) {
+export const addNewSubtask = function (groupNeeded, subtask, newId) {
   const project = getSelectedProject();
   const group = project.subtasks.find(
     (task) => task.heading.toLowerCase() === groupNeeded
   ).list;
-  group.push({ subtask: subtask, completed: false });
+  group.push({
+    subtask: subtask,
+    completed: false,
+    id: newId,
+  });
+};
+
+export const changeSubtaskStatus = function (groupNeeded, subtaskNeeded) {
+  const project = getSelectedProject();
+  const group = project.subtasks.find(
+    (task) => task.heading.toLowerCase() === groupNeeded
+  ).list;
+
+  const subtask = group.find((subtask) => subtask.id === subtaskNeeded);
+  subtask.completed = !subtask.completed;
 };
